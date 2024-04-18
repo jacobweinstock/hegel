@@ -40,16 +40,10 @@ func Middleware(logger logr.Logger) gin.HandlerFunc {
 			"latency", end.Sub(start),
 		)
 
-		// If we received a non-error status code Info else error it.
-		if c.Writer.Status() < 500 {
-			event.Info("")
-		} else {
-			msg := "No error message specified"
+		// If we received an error log it.
+		if len(c.Errors.Errors()) > 0 {
 			errs := strings.Join(c.Errors.Errors(), "; ")
-			if len(c.Errors.Errors()) > 0 {
-				msg = c.Errors.Errors()[0]
-			}
-
+			msg := c.Errors.Errors()[0]
 			event.Error(errors.New(msg), "all_errors", errs)
 		}
 	}

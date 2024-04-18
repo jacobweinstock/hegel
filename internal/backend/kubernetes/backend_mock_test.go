@@ -35,6 +35,25 @@ func (m *MocklisterClient) EXPECT() *MocklisterClientMockRecorder {
 	return m.recorder
 }
 
+// Get mocks base method.
+func (m *MocklisterClient) Get(ctx context.Context, key client.ObjectKey, obj client.Object, opts ...client.GetOption) error {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, key, obj}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "Get", varargs...)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Get indicates an expected call of Get.
+func (mr *MocklisterClientMockRecorder) Get(ctx, key, obj interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, key, obj}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Get", reflect.TypeOf((*MocklisterClient)(nil).Get), varargs...)
+}
+
 // List mocks base method.
 func (m *MocklisterClient) List(ctx context.Context, list client.ObjectList, opts ...client.ListOption) error {
 	m.ctrl.T.Helper()

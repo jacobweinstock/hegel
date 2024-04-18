@@ -161,7 +161,7 @@ func (b *Backend) retrieveByIP(ctx context.Context, ip string) (tinkv1.Hardware,
 
 // listerClient lists Kubernetes resources using a sigs.k8s.io/controller-runtime Backend.
 type listerClient interface {
-	List(ctx context.Context, list crclient.ObjectList, opts ...crclient.ListOption) error
+	crclient.Reader
 }
 
 //nolint:cyclop // This function is just mapping data with a bunch of nil checks, it's not complex.

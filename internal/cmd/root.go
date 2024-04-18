@@ -20,6 +20,7 @@ import (
 	"github.com/tinkerbell/hegel/internal/backend/kubernetes"
 	"github.com/tinkerbell/hegel/internal/frontend/ec2"
 	"github.com/tinkerbell/hegel/internal/frontend/hack"
+	"github.com/tinkerbell/hegel/internal/frontend/secret"
 	"github.com/tinkerbell/hegel/internal/healthcheck"
 	hegelhttp "github.com/tinkerbell/hegel/internal/http"
 	hegellogger "github.com/tinkerbell/hegel/internal/logger"
@@ -137,6 +138,7 @@ func (c *RootCommand) Run(cmd *cobra.Command, _ []string) error {
 	fe.Configure(router)
 
 	hack.Configure(router, be)
+	secret.Configure(router, be)
 
 	// Listen for signals to gracefully shutdown.
 	ctx, cancel := signal.NotifyContext(ctx, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP)

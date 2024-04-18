@@ -9,6 +9,7 @@ import (
 	"github.com/tinkerbell/hegel/internal/backend/kubernetes"
 	"github.com/tinkerbell/hegel/internal/frontend/ec2"
 	"github.com/tinkerbell/hegel/internal/frontend/hack"
+	"github.com/tinkerbell/hegel/internal/frontend/secret"
 	"github.com/tinkerbell/hegel/internal/healthcheck"
 )
 
@@ -24,6 +25,7 @@ type Client interface {
 	ec2.Client
 	hack.Client
 	healthcheck.Client
+	secret.Client
 }
 
 // New creates a backend instance for the configuration specified by opts. Consumers may only
